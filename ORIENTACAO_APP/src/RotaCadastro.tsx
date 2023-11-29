@@ -1,10 +1,7 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import CadastroOrientador from './tabs/CadastroOrientador';
 import CadastroAluno from './tabs/CadastroAluno';
-import Principal from './tabs/Principal';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import React from 'react';
-import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
@@ -13,7 +10,7 @@ const Tab = createMaterialTopTabNavigator();
 export default function MyTabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Principal"
+      initialRouteName="CadastroA"
       tabBarPosition='bottom'
       screenOptions={{
         tabBarActiveTintColor: 'blue',
@@ -22,15 +19,6 @@ export default function MyTabs() {
         tabBarShowIcon: true
       }}
     >
-      <Tab.Screen
-        name="Principal"
-        component={Principal}
-        options={{ tabBarLabel: 'Principal' ,
-                  tabBarIcon: () => (
-                  <Icons name='home' size={25} color='blue' />
-                  ),
-      }}
-      />
       <Tab.Screen
         name="CadastroA"
         component={CadastroAluno}

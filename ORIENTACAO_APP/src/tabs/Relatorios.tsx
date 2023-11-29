@@ -1,10 +1,10 @@
-import { VStack, Text, Image, Box} from "native-base";
+import { VStack, Text, Image, Box, Button} from "native-base";
 import { StyleSheet, TouchableOpacity} from 'react-native';
 import Logo from '../assets/logo.png'
-import { CommonActions } from "@react-navigation/native";
 import { TEMAS } from "../estilos/temas";
 
-export default function Principal(navigation) {
+
+export default function Principal({navigation}) {
   return (
     <VStack flex={1} alignItems="center" p={5} justifyContent="center">
       <Image source={Logo} alt="Logo App Orientação" size={250} borderRadius={100}/>
@@ -14,15 +14,11 @@ export default function Principal(navigation) {
       </Text>
 
       <Box w="100%" flexDirection="row" justifyContent="center" mt={4}>
-        <Text>Para mais informações: </Text>
-        <TouchableOpacity onPress={() => navigation.dispatch(
-          CommonActions.reset({
-            index: 1,
-            routes: [{ name: '' }]
-          })
-        )}>
-          <Text color={TEMAS.colors.blue[600]}>Clique Aqui!</Text>
-        </TouchableOpacity>
+      <Button w="100%" bg={TEMAS.colors.blue[600]} mt={8} borderRadius='lg'
+      onPress={() => navigation.navigate('Relatorio')}
+      >Criar Orientação
+      </Button>
+
       </Box>
     </VStack>
   );

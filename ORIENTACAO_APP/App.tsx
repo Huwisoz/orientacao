@@ -1,13 +1,13 @@
 // Importação de bibliotecas e componentes necessários
 import { TEMAS } from './src/estilos/temas';
 import { NativeBaseProvider, StatusBar } from 'native-base'; 
-import CadastroOrientador from './src/tabs/CadastroOrientador';
-import CadastroAluno from './src/tabs/CadastroAluno';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './src/Login';
 import React from 'react';
 import MyTabs from './src/RotaCadastro';
+import Principal from './src/tabs/Relatorios';
+import Relatorios from './src/tabs/CadastroRelatorios';
 
 // Cria um objeto StackNavigator
 const Stack = createStackNavigator();
@@ -21,7 +21,10 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name='Login' component={Login}/>
-          <Stack.Screen name='Rotas' component={MyTabs}/>
+          <Stack.Screen name='Cadastro' component={MyTabs}/>
+          <Stack.Screen name='Home' component={Principal}/>
+          <Stack.Screen name='Relatorio' component={Relatorios}/>
+
         </Stack.Navigator>
       </NavigationContainer>
 
