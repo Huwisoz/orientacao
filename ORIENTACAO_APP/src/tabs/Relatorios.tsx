@@ -7,7 +7,7 @@ import { TEMAS } from "../estilos/temas";
 export default function Principal({navigation}) {
   return (
     <VStack flex={1} alignItems="center" p={5} justifyContent="center">
-      <Image source={Logo} alt="Logo App Orientação" size={250} borderRadius={100}/>
+      <Image source={Logo} alt="Logo App Orientação" size={200} borderRadius={100}/>
 
       <Text fontSize="5xl" fontWeight="bold" color="blue.600" textAlign="center" mt={5}>
         Bem vindo!

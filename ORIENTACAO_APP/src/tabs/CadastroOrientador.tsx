@@ -22,7 +22,7 @@ export default function CadastroOrientador() {
     return (
         <VStack flex={1} alignItems="center" p={5}>
         {/*Exibe uma imagem */}
-        <Image source={Logo} alt="Logo App Orientação" size={150} borderRadius={100}/>
+        <Image source={Logo} alt="Logo App Orientação" size={100} borderRadius={100}/>
         {/* Exibe o título da seção atual */}
         <Titulo>
                 {usuario.titulo}

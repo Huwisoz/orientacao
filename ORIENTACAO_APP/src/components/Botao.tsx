@@ -15,7 +15,7 @@ export function Botao({ children, autoSize = false, color, ...rest }: ButtonProp
         <Button
             w={autoSize ? 'auto' : '100%'} // Define a largura do botão como 'auto' ou '100%' com base na prop autoSize
             bg={color || TEMAS.colors.blue[600]} // Define a cor de fundo com base na prop color ou usa a cor padrão do tema
-            mt={10} // Define a margem superior
+            mt={5} // Define a margem superior
             borderRadius="lg" // Define o raio de borda como 'lg' (large)
             _text={{ color: 'white' }} // Define a cor do texto como branco
             {...rest} // Espalha quaisquer outras props passadas para o componente Button

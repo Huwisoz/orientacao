@@ -1,11 +1,12 @@
-import { VStack, Box, Button, Select, Text} from "native-base";
+import { VStack, Box, Button, Select, Text, Image} from "native-base";
 import { StyleSheet } from 'react-native';
 import DocumentPicker from 'react-native-document-picker/package.json';
 
 import { TEMAS } from "../estilos/temas";
 import { EntradaTexto } from "../components/EntradaTexto";
 import { useState } from "react";
-import { Botao } from "../components/Botao";
+import Logo from '../assets/logo.png'
+
 
 export default function Relatorios({navigation}) {
   const [titulo, setTitulo] = useState('');
@@ -31,7 +32,9 @@ export default function Relatorios({navigation}) {
   };
 
   return (
-    <VStack flex={1} alignItems="center" p={5} justifyContent="center">
+    
+    <VStack alignItems="center" p={5} justifyContent="center">
+      <Image source={Logo} alt="Logo App Orientação" size={100} borderRadius={25}/>
       <EntradaTexto label="Titulo" placeholder="Insira o nome do relatorio." value={titulo} onChangeText={setTitulo} />
 
       <Box>
@@ -53,7 +56,7 @@ export default function Relatorios({navigation}) {
 
       <Box w="100%" flexDirection="row" justifyContent="center" mt={4}>
       <Button w="100%" bg={TEMAS.colors.blue[600]} mt={8} borderRadius='lg'
-      onPress={() => navigation.navigate('Relatorios')}
+      onPress={() => navigation.navigate('Home')}
       >Enviar Relatorio de Orientação
       </Button>
       </Box>
