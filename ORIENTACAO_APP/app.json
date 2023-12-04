@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "APPREACT",
-    "plugins":[["expo-document-picker"]],
+    "plugins":["expo-document-picker"],
     "slug": "APPREACT",
     "version": "1.0.0",
     "orientation": "portrait",

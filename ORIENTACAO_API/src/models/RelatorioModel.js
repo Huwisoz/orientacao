@@ -6,7 +6,7 @@ module.exports = {
     getAll: ()=>{
         return new Promise((resolve, reject)=>{
 
-            db.query('SELECT * FROM unidades', (error, results)=>{
+            db.query('SELECT * FROM orientacao', (error, results)=>{
                 if(error) { reject(error); return; }
                 resolve(results);
             });
@@ -16,7 +16,7 @@ module.exports = {
     findById: (id)=>{
         return new Promise((resolve, reject)=>{
 
-            db.query('SELECT * FROM unidades WHERE id = ?', [id], (error, results)=>{
+            db.query('SELECT * FROM orientacao WHERE id = ?', [id], (error, results)=>{
                 if(error) { reject(error); return; }
                 if(results.length > 0){
                     resolve(results[0]);
@@ -29,7 +29,7 @@ module.exports = {
     },
     add: (nome, area, volume, datacriacao, usuario, isactive)=>{
         return new Promise((resolve, reject)=>{
-            db.query('INSERT INTO unidades (nome, area, volume, datacriacao, usuario, isactive) VALUES (?,?,?,?,?,?)',[nome, area, volume, datacriacao, usuario, isactive],
+            db.query('INSERT INTO orientacao (nome, area, volume, datacriacao, usuario, isactive) VALUES (?,?,?,?,?,?)',[nome, area, volume, datacriacao, usuario, isactive],
             (error, results) =>{
                 if(error) { reject(error); return; }
                 resolve(results.insertId);
@@ -38,7 +38,7 @@ module.exports = {
     },
     update: (id, nome, area, volume, datacriacao, usuario, isactive)=>{
         return new Promise((resolve, reject)=>{
-            db.query('UPDATE unidades SET nome = ?, area = ?, volume = ?, datacriacao = ?, usuario = ?, isactive = ?  WHERE id = ?',[nome, area, volume, datacriacao, usuario, isactive, id],
+            db.query('UPDATE orientacao SET nome = ?, area = ?, volume = ?, datacriacao = ?, usuario = ?, isactive = ?  WHERE id = ?',[nome, area, volume, datacriacao, usuario, isactive, id],
             (error, results) =>{
                 if(error) { reject(error); return; }
                 resolve(results);
@@ -47,7 +47,7 @@ module.exports = {
     },
     delete: (id)=>{
         return new Promise((resolve, reject)=>{
-            db.query('DELETE FROM unidades WHERE id = ?', [id], (error, results)=>{
+            db.query('DELETE FROM orientacao WHERE id = ?', [id], (error, results)=>{
                 if(error) { reject(error); return; }
                 resolve(results);
             })

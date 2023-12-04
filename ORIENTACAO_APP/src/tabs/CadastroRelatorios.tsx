@@ -1,6 +1,9 @@
 import { VStack, Box, Button, Select, Text, Image} from "native-base";
 import { StyleSheet } from 'react-native';
-import DocumentPicker from 'react-native-document-picker/package.json';
+import * as DocumentPicker from 'expo-document-picker';
+// import FilePickerManager from 'react-native-file-picker';
+import RNFS from 'react-native-fs';
+import PDFView from 'react-native-pdf';
 
 import { TEMAS } from "../estilos/temas";
 import { EntradaTexto } from "../components/EntradaTexto";
@@ -13,23 +16,40 @@ export default function Relatorios({navigation}) {
   const [service, setService] = useState('');
   const [selectedFile, setSelectedFile] = useState<any>();
 
-  const pickDocument = async () => {
-    try {
-      const result = await DocumentPicker.pick({
-        type: [DocumentPicker.types.pdf],
-      });
+  // const pickDocument = async () => {
+  //   try {
+  //     const result = await DocumentPicker.pick({
+  //       type: [DocumentPicker.types.pdf],
+  //     });
 
-      console.log(result);
+  //     console.log(result);
 
-      setSelectedFile(result);
-    } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-        // Usuário cancelou a escolha do arquivo
-      } else {
-        throw err;
-      }
-    }
-  };
+  //     setSelectedFile(result);
+  //   } catch (err) {
+  //     if ( DocumentPicker.isCancel(err)) {
+  //       console.log(err)
+  //       // Usuário cancelou a escolha do arquivo
+  //     } else {
+  //       throw err;
+  //     }
+  //   }
+  // };
+
+  // const pickDocument = () => {
+  //   FilePickerManager.showFilePicker({}, (response) => {
+  //     if (response.didCancel) {
+  //       console.log('Seleção cancelada');
+  //     } else if (response.error) {
+  //       console.log('Erro ao selecionar o arquivo:', response.error);
+  //     } else {
+  //       // O objeto `response` conterá informações sobre o arquivo selecionado
+  //       console.log(response);
+
+  //       setSelectedFile(response);
+  //     }
+  //   });
+  // };
+
 
   return (
     
@@ -49,8 +69,8 @@ export default function Relatorios({navigation}) {
         </Select>
       </Box>
 
-      <Text marginTop={8}>Arquivo Selecionado:</Text>
-        <Button w="100%" bg={TEMAS.colors.blue[600]} mt={8} borderRadius='lg' onPress={pickDocument}>Selecionar Arquivo</Button >
+      {/* <Text marginTop={8}>Arquivo Selecionado:</Text>
+        <Button w="100%" bg={TEMAS.colors.blue[600]} mt={8} borderRadius='lg' onPress={pickDocument}>Selecionar Arquivo</Button > */}
       
 
 
