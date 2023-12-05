@@ -1,5 +1,6 @@
 //Controller da Unidade
 
+const { format } = require("date-fns");
 const RelatorioModel = require("../models/RelatorioModel");
 
 
@@ -11,7 +12,8 @@ module.exports = {
 
         for(let i in orientacao){
             json.result.push({
-                ...orientacao[i]
+                ...orientacao[i],
+                data: format(new Date(orientacao[i].data),"d MMM yyyy 'às' HH:mm")
                 
             })
         }

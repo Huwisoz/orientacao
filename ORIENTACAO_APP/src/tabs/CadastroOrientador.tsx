@@ -1,5 +1,5 @@
 // Importação de bibliotecas e componentes necessários
-import { VStack, Image, Box, Checkbox} from "native-base";
+import { VStack, Image, Box, ScrollView} from "native-base";
 import {useState} from 'react';
 import Logo from '../assets/logo.png';
 import { Titulo } from "../components/Titulo";
@@ -7,6 +7,7 @@ import { EntradaTexto } from "../components/EntradaTexto";
 import { Botao } from "../components/Botao";
 import { usuario } from "../utils/CadastroOrientador";
 import { CommonActions, useNavigation } from "@react-navigation/native";
+import { TEMAS, estilo } from "../estilos/temas";
 
 // Função de componente principal para o cadastro de aluno
 export default function CadastroOrientador() {
@@ -21,6 +22,7 @@ export default function CadastroOrientador() {
 
     return (
         <VStack flex={1} alignItems="center" p={5}>
+        <ScrollView>
         {/*Exibe uma imagem */}
         <Image source={Logo} alt="Logo App Orientação" size={100} borderRadius={100}/>
         {/* Exibe o título da seção atual */}
@@ -51,7 +53,9 @@ export default function CadastroOrientador() {
               index:1, routes:[{name:'Login'}]
             })
           )}
-          >Cadastrar-se</Botao>
+          >
+          Cadastrar-se
+          </Botao>
 
         <Botao bgColor='blue.600'
             onPress={() => navigation.dispatch(
@@ -60,9 +64,11 @@ export default function CadastroOrientador() {
                     routes: [{ name: 'Login' }]
                 })
             )}
-        >Voltar</Botao>
+        >
+        Voltar
+        </Botao>
 
-
+        </ScrollView>
         </VStack>
     );
 }

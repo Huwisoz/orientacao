@@ -1,11 +1,7 @@
-import { VStack, Box, Button, Select, Text, Image} from "native-base";
-import { StyleSheet } from 'react-native';
+import { VStack, Box, Button, Select, Image, ScrollView} from "native-base";
 import * as DocumentPicker from 'expo-document-picker';
-// import FilePickerManager from 'react-native-file-picker';
-import RNFS from 'react-native-fs';
-import PDFView from 'react-native-pdf';
 
-import { TEMAS } from "../estilos/temas";
+import { TEMAS, estilo } from "../estilos/temas";
 import { EntradaTexto } from "../components/EntradaTexto";
 import { useEffect, useState } from "react";
 import Logo from '../assets/logo.png'
@@ -65,8 +61,9 @@ const submitDocument = async() => {
 
   return (
     
-    <VStack alignItems="center" p={5} justifyContent="center">
+    <VStack alignItems="center" p={5} justifyContent="center" style={estilo.scrollContainer}>
       <Image source={Logo} alt="Logo App Orientação" size={100} borderRadius={25}/>
+      <ScrollView>
       <EntradaTexto label="Titulo" placeholder="Insira o nome do relatorio." value={titulo} onChangeText={setTitulo} />
 
       <Box>
@@ -86,20 +83,30 @@ const submitDocument = async() => {
 
 
       <Box w="100%" flexDirection="row" justifyContent="center" mt={4}>
-      <Button w="100%" bg={TEMAS.colors.blue[600]} mt={8} borderRadius='lg'
+      <Button 
+      w="100%" 
+      bg={TEMAS.colors.blue[600]} 
+      mt={8} borderRadius='lg'
       onPress={submitDocument}
-      >Enviar Relatorio de Orientação
+      >
+      Enviar Relatorio de Orientação
       </Button>
       </Box>
+
+
+      <Box>
+      <Button 
+      w="100%" 
+      bg={TEMAS.colors.blue[350]} 
+      mt={3} 
+      borderRadius='lg'
+      onPress={() => navigation.replace("Home")}
+      >
+      Voltar
+      </Button>
+      </Box>
+
+      </ScrollView>
     </VStack>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
