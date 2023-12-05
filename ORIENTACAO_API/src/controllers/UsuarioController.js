@@ -19,9 +19,11 @@ module.exports = {
     },
     one: async (req, res) => {
         let json = {error:'', result:{}};
-        let matricula = req.params.matricula;
-        console.log(matricula);
-        let user = await UsuarioModel.findUser(matricula);
+        let email = req.body.email;
+        let senha = req.body.senha;
+        
+        let user = await UsuarioModel.findEmail(email, senha);
+        console.log("test:",user);
         if(user){
             json.result = user;
         }
@@ -38,10 +40,9 @@ module.exports = {
         let tipoUsuario = req.body.tipoUsuario
 
 
-        if(nome && email && senha && matricula && tipo_usuario_idtipo_usuario){
-            let unidadeId = await UsuarioModel.add(nome, matricula, senha, email, tipo_usuario_idtipo_usuario);
+        if(nome && email && senha && matricula && tipoUsuario){
+            await UsuarioModel.add(nome, matricula, email, senha, tipoUsuario);
             json.result = {
-                id: unidadeId,
                 nome,
                 matricula,
                 email,

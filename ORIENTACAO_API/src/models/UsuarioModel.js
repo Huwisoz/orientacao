@@ -11,10 +11,9 @@ module.exports = {
 
         });
     },
-    findUser: (matricula) => {
-        console.log(matricula);
+    findEmail: (email, senha) => {
         return new Promise ((resolve, reject)=>{
-            db.query('SELECT * FROM usuario WHERE matricula = ?', [matricula], (error, results)=>{
+            db.query('SELECT * FROM usuario WHERE email = ? AND senha = ?', [email, senha], (error, results)=>{
                 console.log(results);
                 if(error){reject(error); return;}
                 if(results.length > 0){
@@ -25,9 +24,9 @@ module.exports = {
             })
         })
     },
-    add: (nome, matricula, senha, tipo_usuario_idtipo_usuario, email)=>{
+    add: (nome, matricula, email, senha, tipo_usuario_idtipo_usuario)=>{
         return new Promise((resolve, reject)=>{
-            db.query('INSERT INTO usuario (nome, matricula, senha, tipo_usuario_idtipo_usuario, email) VALUES (?,?,?,?,?)',[nome, matricula, senha,tipo_usuario_idtipo_usuario, email],
+            db.query('INSERT INTO usuario (nome, matricula, email, senha, tipo_usuario_idtipo_usuario) VALUES (?,?,?,?,?)',[nome, matricula, email, senha, tipo_usuario_idtipo_usuario],
             (error, results) =>{
                 if(error) { reject(error); return; }
                 resolve(results.insertId);
@@ -51,4 +50,5 @@ module.exports = {
             });
         });
     }
+    
 }

@@ -5,6 +5,7 @@ import { TEMAS } from './estilos/temas';
 import { CommonActions} from "@react-navigation/native"
 import { EntradaTexto } from "./components/EntradaTexto";
 import { useState } from "react";
+import { fazerLogin } from "./servicos/autenticacao";
 
 
 
@@ -15,19 +16,19 @@ export default function Login({navigation}) {
   const [senha, setSenha] = useState('');
   const toast = useToast();
 
-  // async function login(){
-  //   const resultado = await fazerLogin(email, senha);
-  //   console.log(resultado);
-  //   if(resultado && resultado.result.id){
-  //     navigation.replace('Tabs');
-  //   }else{
-  //     toast.show({
-  //       title: "Erro no Login!",
-  //       description: "E-mail ou senha inválidos! Verifique!",
-  //       backgroundColor: 'red.500'
-  //     })
-  //   }
-  // }
+  async function login(){
+    const resultado = await fazerLogin(email, senha);
+    console.log(resultado);
+    if(resultado && resultado.result.idusuario){
+      navigation.replace('Home');
+    }else{
+      toast.show({
+        title: "Erro no Login!",
+        description: "E-mail ou senha inválidos! Verifique!",
+        backgroundColor: 'red.500'
+      })
+    }
+  }
 
   return (
     <VStack flex={1} alignItems="center" p={5} justifyContent="center">
@@ -46,7 +47,7 @@ export default function Login({navigation}) {
 
       {/* Botão de login */}
       <Button w="100%" bg={TEMAS.colors.blue[600]} mt={8} borderRadius='lg'
-      onPress={() => navigation.navigate('Home')}
+      onPress={login}
       >Entrar
       </Button>
 

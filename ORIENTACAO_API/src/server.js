@@ -5,9 +5,15 @@ const bodyParser = require("body-parser");
 
 const routes = require("./routes")
 const server = express();
+// const corsOptions = {
+//     origin: ['*','http://localhost:8081/'],
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//     credentials: true,
+//   };
 
 server.use(cors());
 server.use(bodyParser.urlencoded({extended: false}));
+server.use(bodyParser.json());
 server.use('/api',routes);
 
 server.listen(process.env.PORT, ()=>{

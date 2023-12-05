@@ -6,9 +6,10 @@ const router = express.Router();
 const RelatorioController = require("./controllers/RelatoriosController");
 const UsuarioController = require("./controllers/UsuarioController");
 
-router.get("/usuario/:matricula", UsuarioController.one);
-router.post("/usuario", UsuarioController.new);
-router.all("/usuario", UsuarioController.all);
+router.post("/usuario/login", UsuarioController.one);
+router.get("/usuario", UsuarioController.all);
+router.post("/usuario",async (req,res) => await UsuarioController.new(req,res));
+
 
 
 

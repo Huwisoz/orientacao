@@ -1,6 +1,6 @@
 // Importação de bibliotecas e componentes necessários
 import { TEMAS } from './src/estilos/temas';
-import { NativeBaseProvider, StatusBar } from 'native-base'; 
+import { NativeBaseProvider, StatusBar,VStack} from 'native-base'; 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './src/Login';
@@ -19,13 +19,12 @@ export default function App() {
       <StatusBar backgroundColor={TEMAS.colors.blue[600]}/>
 
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name='Login' component={Login}/>
-          <Stack.Screen name='Cadastro' component={MyTabs}/>
-          <Stack.Screen name='Home' component={Principal}/>
-          <Stack.Screen name='Relatorio' component={Relatorios}/>
-
-        </Stack.Navigator>
+          <Stack.Navigator>
+            <Stack.Screen name='Login' component={Login}/>
+            <Stack.Screen name='Cadastro' component={MyTabs}/>
+            <Stack.Screen name='Home' component={Principal}/>
+            <Stack.Screen name='Relatorio' component={Relatorios}/>
+          </Stack.Navigator>
       </NavigationContainer>
 
     </NativeBaseProvider>
