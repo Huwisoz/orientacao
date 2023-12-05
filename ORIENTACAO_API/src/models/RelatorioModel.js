@@ -1,6 +1,7 @@
 //Modelo Unidade
 
 const db = require('../db');
+const { format } = require('date-fns');
 
 module.exports = {
     getAll: ()=>{
@@ -27,21 +28,12 @@ module.exports = {
 
         });
     },
-    add: (nome, area, volume, datacriacao, usuario, isactive)=>{
+    add: (titulo, texto, idAluno)=>{
         return new Promise((resolve, reject)=>{
-            db.query('INSERT INTO orientacao (nome, area, volume, datacriacao, usuario, isactive) VALUES (?,?,?,?,?,?)',[nome, area, volume, datacriacao, usuario, isactive],
+            db.query('INSERT INTO orientacao (titulo, text, data, usuario_idusuario) VALUES (?,?,?,?)',[titulo, texto, format(new Date(), 'yyyy-MM-dd HH:mm:ss'), idAluno],
             (error, results) =>{
                 if(error) { reject(error); return; }
                 resolve(results.insertId);
-            })
-        });
-    },
-    update: (id, nome, area, volume, datacriacao, usuario, isactive)=>{
-        return new Promise((resolve, reject)=>{
-            db.query('UPDATE orientacao SET nome = ?, area = ?, volume = ?, datacriacao = ?, usuario = ?, isactive = ?  WHERE id = ?',[nome, area, volume, datacriacao, usuario, isactive, id],
-            (error, results) =>{
-                if(error) { reject(error); return; }
-                resolve(results);
             })
         });
     },

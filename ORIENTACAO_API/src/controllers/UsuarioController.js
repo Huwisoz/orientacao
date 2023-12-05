@@ -3,8 +3,11 @@ const UsuarioModel = require("../models/UsuarioModel");
 module.exports = {
     all: async (req, res) => {
         let json = {error: '', result:[]};
-
-        let usuario = await UsuarioModel.getAll();
+        let usuario
+        if(req.params?.tipoUsuario){ usuario=await UsuarioModel.getAluno();}
+        else{
+            usuario = await UsuarioModel.getAll();
+        }
         for(let i in usuario){
             json.result.push({
                 id: usuario[i].id,
@@ -21,9 +24,8 @@ module.exports = {
         let json = {error:'', result:{}};
         let email = req.body.email;
         let senha = req.body.senha;
-        
+
         let user = await UsuarioModel.findEmail(email, senha);
-        console.log("test:",user);
         if(user){
             json.result = user;
         }
@@ -31,7 +33,6 @@ module.exports = {
     },
     new:async (req, res) =>{
         let json = {error: '', result:[]};
-        console.log(req.body);
 
         let nome = req.body.nome;
         let matricula = req.body.matricula;
@@ -58,8 +59,6 @@ module.exports = {
     },
     edit: async (req, res)=>{
         let json= {error: '', result:{}};
-
-
 
         let id = req.params.id;
         let nome = req.body.nome;
@@ -89,5 +88,11 @@ module.exports = {
         await UsuarioModel.delete(req.params.id);
 
         res.json(json);
+    },
+    aluno: async(req,res)=>{
+        let json= {error: '', result:{}};
+        json.result = await UsuarioModel.getAluno()
+        res.json(json);
     }
+    
 }

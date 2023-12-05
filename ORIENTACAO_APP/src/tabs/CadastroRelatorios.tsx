@@ -7,14 +7,27 @@ import PDFView from 'react-native-pdf';
 
 import { TEMAS } from "../estilos/temas";
 import { EntradaTexto } from "../components/EntradaTexto";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from '../assets/logo.png'
+import { buscarUsuario } from "../servicos/buscarUsuario";
+import api from "../servicos/api";
 
 
 export default function Relatorios({navigation}) {
   const [titulo, setTitulo] = useState('');
+  const [text, setText] = useState('');
   const [service, setService] = useState('');
   const [selectedFile, setSelectedFile] = useState<any>();
+  const [listaAlunos, setListaAlunos] = useState<any>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {const alunos = await buscarUsuario();setListaAlunos(alunos)}
+      catch(e){
+        console.log(e);
+      }
+    }
+    fetchData();},[]);
 
   // const pickDocument = async () => {
   //   try {
@@ -35,20 +48,19 @@ export default function Relatorios({navigation}) {
   //   }
   // };
 
-  // const pickDocument = () => {
-  //   FilePickerManager.showFilePicker({}, (response) => {
-  //     if (response.didCancel) {
-  //       console.log('Seleção cancelada');
-  //     } else if (response.error) {
-  //       console.log('Erro ao selecionar o arquivo:', response.error);
-  //     } else {
-  //       // O objeto `response` conterá informações sobre o arquivo selecionado
-  //       console.log(response);
+const submitDocument = async() => {
+  try{
+    const result = api.post('/api/orientacao', {
+      titulo: titulo,
+      texto: text,
+      idAluno: service
+    });
 
-  //       setSelectedFile(response);
-  //     }
-  //   });
-  // };
+    navigation.replace('Home')
+  } catch (e) {
+    console.log(e);
+  } 
+};
 
 
   return (
@@ -58,16 +70,15 @@ export default function Relatorios({navigation}) {
       <EntradaTexto label="Titulo" placeholder="Insira o nome do relatorio." value={titulo} onChangeText={setTitulo} />
 
       <Box>
-      <Select selectedValue={service} minWidth="100%" marginTop={8} accessibilityLabel="Choose Service" placeholder="Choose Service"  _selectedItem={{
+      <Select selectedValue={service} minWidth="100%" marginTop={8} accessibilityLabel="Choose Service" placeholder="Selecione um aluno"  _selectedItem={{
         bg: "blue.200",
         //endIcon: <CheckIcon size="5" />
       }} mt={1} onValueChange={itemValue => setService(itemValue)}>
-          <Select.Item label="Hugo" value="1" />
-          <Select.Item label="Felipe" value="2" />
-          <Select.Item label="Wiegue" value="3" />
-          <Select.Item label="Souza" value="4" />
+          
+          {listaAlunos?.result.map(aluno=>(<Select.Item label={aluno.nome} value={aluno.idusuario}/>))}
         </Select>
       </Box>
+      <EntradaTexto label="Texto" placeholder="Insira as orientações" value={text} onChangeText={setText}  />
 
       {/* <Text marginTop={8}>Arquivo Selecionado:</Text>
         <Button w="100%" bg={TEMAS.colors.blue[600]} mt={8} borderRadius='lg' onPress={pickDocument}>Selecionar Arquivo</Button > */}
@@ -76,7 +87,7 @@ export default function Relatorios({navigation}) {
 
       <Box w="100%" flexDirection="row" justifyContent="center" mt={4}>
       <Button w="100%" bg={TEMAS.colors.blue[600]} mt={8} borderRadius='lg'
-      onPress={() => navigation.navigate('Home')}
+      onPress={submitDocument}
       >Enviar Relatorio de Orientação
       </Button>
       </Box>

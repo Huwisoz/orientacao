@@ -49,6 +49,16 @@ module.exports = {
                 resolve(results);
             });
         });
-    }
+    },
+    getAluno: ()=>{
+        return new Promise((resolve, reject)=>{
+
+            db.query('SELECT * FROM usuario WHERE tipo_usuario_idtipo_usuario = ?',[2], (error, results)=>{
+                if(error) { reject(error); return; }
+                resolve(results);
+            });
+
+        });
+    },
     
 }

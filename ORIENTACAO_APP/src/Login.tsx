@@ -18,7 +18,6 @@ export default function Login({navigation}) {
 
   async function login(){
     const resultado = await fazerLogin(email, senha);
-    console.log(resultado);
     if(resultado && resultado.result.idusuario){
       navigation.replace('Home');
     }else{

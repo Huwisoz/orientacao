@@ -14,7 +14,7 @@ export function EntradaTexto({
     placeholder,
     secureTextEntry = false,
     value,
-    onChangeText
+    onChangeText,
 }:InputProps):JSX.Element{
     return(
         <FormControl mt={3}>
